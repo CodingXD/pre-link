@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Layout from "../components/layouts";
 import LinkPreview from "../components/pages/index/link-preview";
 import Button from "../components/shared/buttons";
+import googleSignup from "../firebase";
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
               Get started now <ArrowRightIcon className="h-3 w-5" />
             </p>
           </div>
-          <Button>Create Account</Button>
+          <Button onClick={googleSignup}>Create Account</Button>
         </div>
       </div>
     </Layout>

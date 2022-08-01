@@ -1,4 +1,5 @@
 import { PhotographIcon, ExternalLinkIcon } from "@heroicons/react/solid";
+import Skeleton from "../../shared/skeleton";
 
 export default function LinkPreview() {
   return (
@@ -7,6 +8,7 @@ export default function LinkPreview() {
         className="text-blue-400 text-xs mb-2 flex items-center"
         target="_blank"
         href="https://google.com"
+        rel="noreferrer"
       >
         https://google.com&nbsp;
         <ExternalLinkIcon className="h-4 w-4" />
@@ -15,9 +17,11 @@ export default function LinkPreview() {
         <PhotographIcon className="h-8 w-8 text-gray-400" />
       </div>
       <div className="py-5 px-3 border-b border-x rounded-b-md">
-        <div className="bg-gray-300 py-1 rounded-full w-1/3"></div>
-        <div className="bg-gray-300 py-1 rounded-full mt-2"></div>
-        <div className="bg-gray-300 py-1 rounded-full w-2/3 mt-1.5"></div>
+        <Skeleton size="sm" />
+        <div className="mt-3 space-y-2">
+          <Skeleton />
+          <Skeleton size="md" />
+        </div>
       </div>
     </div>
   );
