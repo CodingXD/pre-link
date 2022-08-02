@@ -1,37 +1,30 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getLinkPreview } from "link-preview-js";
 
-type Stat = {
-  platform: string;
-  count: string;
-  event: string;
+export type Preview = {
+  url: string;
+  title?: string;
+  siteName?: string | undefined;
+  description?: string | undefined;
+  mediaType?: string;
+  contentType?: string | undefined;
+  images?: string[];
+  videos?: {
+    url: string | undefined;
+    secureUrl: string | null | undefined;
+    type: string | null | undefined;
+    width: string | undefined;
+    height: string | undefined;
+  }[];
+  favicons?: string[];
 };
 
-export type LinkEventStats = {
-  linkEventStats: Stat[];
-};
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<LinkEventStats>
+  res: NextApiResponse<Preview>
 ) {
-  res.status(200).json({
-    linkEventStats: [
-      {
-        platform: "ANDROID",
-        count: "123",
-        event: "CLICK",
-      },
-      {
-        platform: "IOS",
-        count: "123",
-        event: "CLICK",
-      },
-      {
-        platform: "DESKTOP",
-        count: "456",
-        event: "CLICK",
-      },
-    ],
-  });
+  const { url } = req.body;
+  const data = await getLinkPreview(url);
+  res.status(200).json(data as Preview);
 }
